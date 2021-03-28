@@ -1,0 +1,10 @@
+messages:
+  actions:
+    player-wallet-created: "§3<dElite Bank> Ваш кошелек успешно создан!"
+    player-showbalance: "§3<dElite Bank> Ваш баланс: %balance% бугурт"
+    player-getmoney: "§3<dElite Bank> На ваш счет зачислено %amount% бугурт."
+    player-addmoney: "§3<dElite Bank> На счет %player% было зачислено %amount% бугурт."
+  exceptions:
+  errors:
+    player-wallet-created-error: "§3<dElite Bank> Ошибка создания кошелька для вас! Обратитесь к администрации."
+    bank-error-notify: "§3<dElite Bank> Произошла непредвиденная ошибка."
