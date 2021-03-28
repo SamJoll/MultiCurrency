@@ -1,6 +1,14 @@
 main: main.ru.mncw.MultiCurrency
 
 name: MultiCurrency
+description: 'Plugin for adding currency on Minecraft-server!'
 version: 1.0
 author: SamJoll
-website: 
+website: https://github.com/SamJoll/MultiCurrency
+
+commands:
+  showbalance:
+    description: Показывает баланс игрока
+    aliases: [/sbal]
+  addmoney:
+    description: Добавляет денег на счет игрока(ДОСТУПНО ТОЛЬКО АДМИНИСТРАТОРАМ И ВНЕШНИМ ПЛАГИНАМ)

@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MultiCurrency:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MultiCurrency_jar</output-path>
+    <root id="archive" name="MultiCurrency.jar">
+      <element id="module-output" name="MultiCurrency" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/spigot-1.16.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/sqlite-jdbc-3.5.8.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/config.yml" />
+    </root>
+  </artifact>
+</component>
