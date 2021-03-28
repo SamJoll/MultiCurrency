@@ -1,10 +1,11 @@
 package main.ru.mncw;
 
 import main.ru.mncw.Commands.AddMoneyCommand;
+import main.ru.mncw.Commands.SendMoneyCommand;
 import main.ru.mncw.Commands.ShowBalanceCommand;
+import main.ru.mncw.Commands.SubtractMoneyCommand;
 import main.ru.mncw.Handlers.PlayerHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -52,8 +53,11 @@ public class MultiCurrency extends JavaPlugin {
         CreateCustomConfig();
 
         Bukkit.getPluginManager().registerEvents(new PlayerHandler(this), this);
+
         getCommand("showbalance").setExecutor(new ShowBalanceCommand(this));
         getCommand("addmoney").setExecutor(new AddMoneyCommand(this));
+        getCommand("subtractmoney").setExecutor(new SubtractMoneyCommand(this));
+        getCommand("sendmoney").setExecutor(new SendMoneyCommand(this));
 
         log.info(ColorCode.ANSI_CYAN + "[MultiCurrency] Plugin is working!" + ColorCode.ANSI_RESET);
     }

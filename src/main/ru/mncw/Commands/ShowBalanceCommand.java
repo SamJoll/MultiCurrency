@@ -26,7 +26,13 @@ public class ShowBalanceCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender playerSender, Command comm, String label, String[] args) {
         if(playerSender instanceof Player) {
-            if (PlayerWDB.ShowBalance((Player) playerSender) && args.length <= 0) {
+            if (PlayerWDB.ShowBalance((Player) playerSender) >= 0 && args.length <= 0) {
+                Bukkit.getPlayer(
+                        playerSender.getName()).sendMessage(
+                                plugin.getConfig().getString("messages.actions.player-showbalance").replace("%balance%", String.valueOf(PlayerWDB.ShowBalance((Player)playerSender)
+                        ))
+                );
+
                 return true;
             } else {
                 Bukkit.getPlayer(playerSender.getName()).sendMessage(plugin.getConfig().getString("messages.errors.bank-error-notify"));

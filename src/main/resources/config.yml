@@ -4,6 +4,10 @@ messages:
     player-showbalance: "§3<dElite Bank> Ваш баланс: %balance% бугурт"
     player-getmoney: "§3<dElite Bank> На ваш счет зачислено %amount% бугурт."
     player-addmoney: "§3<dElite Bank> На счет %player% было зачислено %amount% бугурт."
+    player-raisemoney: "§3<dElite Bank> С вашего счета снято %amount% бугурт."
+    player-subtractmoney: "§3<dElite Bank> Со счета игрока %player% вычтено %amount% бугурт."
+    player-sendmoney: "§3<dElite Bank> На счет %player% было успешно переведено %amount% бугурт!"
+    player-getsendmoney: "§3<dElite Bank> На ваш счет было зачислено %amount% бугурт от игрока %player%"
   exceptions:
   errors:
     player-wallet-created-error: "§3<dElite Bank> Ошибка создания кошелька для вас! Обратитесь к администрации."

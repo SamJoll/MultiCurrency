@@ -1,5 +1,6 @@
 package main.ru.mncw.DataBases;
 
+import main.ru.mncw.Commands.ShowBalanceCommand;
 import main.ru.mncw.MultiCurrency;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,7 +26,7 @@ public class PlayersWalletDB {
         dbConc.close();
     }
 
-    //    Функция подключения к базе данных
+//    Функция подключения к базе данных
     public Connection getConnection() throws Exception {
         return DriverManager.getConnection(dataBasePath);
     }
@@ -51,7 +52,7 @@ public class PlayersWalletDB {
         }
     }
 //    Функция показа баланса игрока
-    public boolean ShowBalance(Player player) {
+    public double ShowBalance(Player player) {
         try {
             String playerName = player.getName();
 
@@ -61,18 +62,16 @@ public class PlayersWalletDB {
             ResultSet recordBalance = dbState.executeQuery("SELECT balance FROM playerBalanceInfo WHERE nickname = '"+ playerName +"'");
             double playerBalance = recordBalance.getDouble(1);
 
-            Bukkit.getPlayer(playerName).sendMessage(plugin.getConfig().getString("messages.actions.player-showbalance").replace("%balance%", String.valueOf(playerBalance)));
-
             dbState.close();
             dbConc.close();
 
-            return true;
+            return playerBalance;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return -1;
         }
     }
-//    Добавление баланса на счет
+//    Добавление денег на счет
     public boolean AddMoney(Player targetPlayer, double amount) {
         try {
             String playerName = targetPlayer.getName();
@@ -101,6 +100,57 @@ public class PlayersWalletDB {
             }
         } catch(Exception e) {
             e.printStackTrace();
+            return false;
+        }
+    }
+//    Вычетание денег со счета
+    public boolean SubtractMoney(Player targetPlayer, double amount) {
+        try {
+            String playerName = targetPlayer.getName();
+
+            Connection dbConc = getConnection();
+            Statement dbState = dbConc.createStatement();
+
+            ResultSet playerBalanceRecord = dbState.executeQuery("SELECT balance FROM playerBalanceInfo WHERE nickname = '"+ playerName +"'");
+            double currentPlayerBalance = playerBalanceRecord.getDouble(1);
+
+            if(amount > 0 && currentPlayerBalance >= amount) {
+                double newPlayerBalance = currentPlayerBalance - amount;
+
+                dbState.executeUpdate("UPDATE playerBalanceInfo SET balance = "+ newPlayerBalance +" WHERE nickname = '"+ playerName +"'");
+
+                dbState.close();
+                dbConc.close();
+
+                return true;
+            } else {
+                dbState.close();
+                dbConc.close();
+
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return false;
+        }
+    }
+//    Перечисляет деньги на счет другого игрока
+    public boolean SendMoney(Player player, Player targetPlayer, double amount) {
+        try {
+            if(amount > 0 && ShowBalance(player) >= amount) {
+
+                SubtractMoney(player, amount);
+                AddMoney(targetPlayer, amount);
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
             return false;
         }
     }
