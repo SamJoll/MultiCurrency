@@ -1,22 +1,27 @@
 package main.ru.mncw.Handlers;
 
-import main.ru.mncw.DataBases.PlayersWalletDB;
+import main.ru.mncw.DataBases.PlayersDB;
 import main.ru.mncw.MultiCurrency;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerHandler implements Listener {
 
+//    Класс плагина
     MultiCurrency plugin;
-    PlayersWalletDB PlayerWDB;
+//    Класс БД игроков
+    PlayersDB PlayersDB;
 
+//    Конструктор класса
+//    Создаем экземпляры классов выше
     public PlayerHandler(MultiCurrency plugin) {
         this.plugin = plugin;
 
         try {
-            PlayerWDB = new PlayersWalletDB(plugin);
+            PlayersDB = new PlayersDB();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -24,10 +29,12 @@ public class PlayerHandler implements Listener {
 
     @EventHandler
     void onPlayerJoin(PlayerJoinEvent e) {
-        if(PlayerWDB.AddNewPlayer(e.getPlayer())) {
-            Bukkit.getPlayer(e.getPlayer().getName()).sendMessage(plugin.getConfig().getString("messages.actions.player-wallet-created"));
+        Player player = e.getPlayer();
+
+        if(PlayersDB.AddNewPlayer(player)) {
+            Bukkit.getPlayer(player.getUniqueId()).sendMessage(plugin.getConfig().getString("messages.actions.player-wallet-created"));
         } else {
-            Bukkit.getPlayer(e.getPlayer().getName()).sendMessage(plugin.getConfig().getString("messages.actions.player-wallet-created-error"));
+            Bukkit.getPlayer(player.getUniqueId()).sendMessage(plugin.getConfig().getString("messages.errors.player-wallet-created-error"));
         }
     }
 }

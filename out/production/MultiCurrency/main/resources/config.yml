@@ -12,3 +12,15 @@ messages:
   errors:
     player-wallet-created-error: "§3<dElite Bank> Ошибка создания кошелька для вас! Обратитесь к администрации."
     bank-error-notify: "§3<dElite Bank> Произошла непредвиденная ошибка."
+
+transactions:
+  datetime-color: "§"
+  status:
+    success: "§2УСПЕШНО"
+    not-success: "§4БЕЗУСПЕШНО"
+  addmoney: "§fЗачислено %amount% бугурт"
+  subtractmoney: "§fВычтено %amount% бугурт"
+  sendmoney: "§fПеревод %amount% бугурт игроку %target-player% от %player%"
+
+
+transactions-title: "Недавние транзакции"

@@ -17,3 +17,6 @@ commands:
   sendmoney:
     description: Отправляет деньги на счет другого игрока
     aliases: [/smon]
+  transactions:
+    description: Показывает недавние транзакции
+    aliases: [/trans]
